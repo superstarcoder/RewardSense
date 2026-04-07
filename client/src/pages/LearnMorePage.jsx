@@ -604,7 +604,25 @@ export default function LearnMorePage() {
   return (
     <div className="max-w-5xl mx-auto">
       <Tabs value={tab} onValueChange={switchTab}>
-        <TabsList className="mb-8 glass border border-white/10 h-auto p-1 w-full sm:w-fit">
+        {/* Mobile column nav */}
+        <div className="flex sm:hidden flex-col glass border border-white/10 rounded-lg p-1 mb-8 gap-1">
+          {TABS.map(({ id, label }) => (
+            <button
+              key={id}
+              onClick={() => switchTab(id)}
+              className={`text-xs px-4 py-2 rounded-md text-left transition-colors ${
+                tab === id
+                  ? 'bg-background text-foreground font-medium'
+                  : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+
+        {/* Desktop row nav */}
+        <TabsList className="hidden sm:flex mb-8 glass border border-white/10 h-auto p-1 w-fit">
           {TABS.map(({ id, label }) => (
             <TabsTrigger key={id} value={id} className="text-xs px-4 py-2">
               {label}
